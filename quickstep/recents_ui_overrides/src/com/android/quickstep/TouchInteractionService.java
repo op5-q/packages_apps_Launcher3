@@ -314,7 +314,6 @@ public class TouchInteractionService extends Service implements
         // Initialize anything here that is needed in direct boot mode.
         // Everything else should be initialized in initWhenUserUnlocked() below.
         mMainChoreographer = Choreographer.getInstance();
-        mAM = ActivityManagerWrapper.getInstance();
 
         if (UserManagerCompat.getInstance(this).isUserUnlocked(Process.myUserHandle())) {
             initWhenUserUnlocked();
@@ -472,6 +471,7 @@ public class TouchInteractionService extends Service implements
     }
 
     private void initWhenUserUnlocked() {
+        mAM = ActivityManagerWrapper.getInstance();
         mRecentsModel = RecentsModel.INSTANCE.get(this);
         mOverviewComponentObserver = new OverviewComponentObserver(this);
 
