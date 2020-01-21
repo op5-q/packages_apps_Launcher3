@@ -61,8 +61,6 @@ import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Toast;
 
-import com.android.internal.util.aospextended.AEXUtils;
-
 import com.android.launcher3.Launcher.LauncherOverlay;
 import com.android.launcher3.LauncherAppWidgetHost.ProviderChangedListener;
 import com.android.launcher3.LauncherStateManager.AnimationConfig;
@@ -108,6 +106,9 @@ import com.android.launcher3.widget.PendingAppWidgetHostView;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.function.Predicate;
+
+import android.os.PowerManager;
+import android.os.SystemClock;
 
 /**
  * The workspace is a wide area with a wallpaper and a finite number of pages.
@@ -267,6 +268,14 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
         this(context, attrs, 0);
     }
 
+    // Util Function to turn screen off
+    public static void switchScreenOff(Context ctx) {
+        PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+        if (pm!= null) {
+            pm.goToSleep(SystemClock.uptimeMillis());
+        }
+    }
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -295,7 +304,7 @@ public class Workspace extends PagedView<WorkspacePageIndicator>
                 new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent event) {
-                AEXUtils.switchScreenOff(context);
+                switchScreenOff(context);
                 return true;
             }
         });
