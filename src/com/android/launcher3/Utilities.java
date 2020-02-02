@@ -96,6 +96,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import android.app.ProgressDialog;
 
 /**
  * Various utilities shared amongst the Launcher's classes.
